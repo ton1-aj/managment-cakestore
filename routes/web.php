@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KueController;
 use App\Http\Controllers\KategoriKueController;
 use App\Http\Controllers\DataPegawaiController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,4 +35,7 @@ Route::get('/data_pegawai', [DataPegawaiController::class, 'index'])->name('data
 Route::post('/data_pegawai', [DataPegawaiController::class, 'store'])->name('data_pegawai.store');
 Route::put('/data_pegawai/{id}', [DataPegawaiController::class, 'update'])->name('data_pegawai.update');
 Route::delete('/data_pegawai/{id}', [DataPegawaiController::class, 'destroy'])->name('data_pegawai.destroy');
+
+// Routes untuk dashboard admin
+Route::get('/admin_dashboard', [AdminController::class, 'index'])->name('admin_dashboard');
 
