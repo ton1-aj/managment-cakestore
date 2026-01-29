@@ -4,15 +4,15 @@
     <title>Dashboard Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* BODY */
+        /* BODY & BACKGROUND */
         body {
-            background: linear-gradient(120deg, #f0f4f8, #d9e2ec);
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         /* NAVBAR */
         .navbar {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         /* CARD SUMMARY */
@@ -21,11 +21,16 @@
             padding: 30px 20px;
             transition: all 0.3s ease-in-out;
             box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            color: #fff;
+        }
+
+        .card-summary.bg-primary {
             background: linear-gradient(45deg, #6a11cb, #2575fc);
         }
 
         .card-summary.bg-warning {
             background: linear-gradient(45deg, #f6d365, #fda085);
+            color: #333;
         }
 
         .card-summary.bg-success {
@@ -45,9 +50,14 @@
             font-weight: 700;
         }
 
+        .card-summary h5 {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
         /* TABLE STYLING */
         table.table {
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 6px 15px rgba(0,0,0,0.05);
         }
@@ -64,15 +74,30 @@
         table.table img {
             border-radius: 10px;
             box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            max-height: 50px;
         }
 
         /* CARD HEADER */
         .card-header {
             font-weight: 600;
             letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            border-bottom: none;
         }
 
-        /* TABLES SPACING */
+        /* CARD HEADER VARIANTS */
+        .card-header.bg-warning {
+            background: linear-gradient(135deg, #f6d365, #fda085);
+            color: #333;
+        }
+
+        .card-header.bg-info {
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            color: #fff;
+        }
+
+        /* CARD BODY */
         .card-body.p-0 {
             padding: 0 !important;
         }
@@ -82,6 +107,7 @@
             color: #333;
             font-weight: 600;
         }
+
     </style>
 </head>
 <body>
@@ -117,24 +143,24 @@
     {{-- CARD SUMMARY --}}
     <div class="row mb-4">
         <div class="col-md-4 mb-3">
-            <div class="card card-summary bg-success text-white">
-                <div class="card-body text-center">
+            <div class="card card-summary bg-success text-white text-center">
+                <div class="card-body">
                     <h5 class="card-title">Jumlah Kue</h5>
                     <h3 class="card-text">{{ $kue->count() }}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card card-summary bg-warning text-dark">
-                <div class="card-body text-center">
+            <div class="card card-summary bg-warning text-dark text-center">
+                <div class="card-body">
                     <h5 class="card-title">Jumlah Kategori</h5>
                     <h3 class="card-text">{{ $kategori_kue->count() }}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-3">
-            <div class="card card-summary bg-info text-white">
-                <div class="card-body text-center">
+            <div class="card card-summary bg-info text-white text-center">
+                <div class="card-body">
                     <h5 class="card-title">Jumlah Pegawai</h5>
                     <h3 class="card-text">{{ $data_pegawai->count() }}</h3>
                 </div>
@@ -144,9 +170,7 @@
 
     {{-- TABEL DATA KUE --}}
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-primary text-white">
-            Data Kue
-        </div>
+        <div class="card-header bg-primary text-white">Data Kue</div>
         <div class="card-body p-0">
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-light">
@@ -169,7 +193,7 @@
                         <td>{{ $item->stok_kue }}</td>
                         <td>
                             @if($item->foto_kue)
-                                <img src="{{ asset('storage/' . $item->foto_kue) }}" width="50" class="img-thumbnail">
+                                <img src="{{ asset('storage/' . $item->foto_kue) }}" class="img-thumbnail">
                             @else
                                 -
                             @endif
@@ -187,9 +211,7 @@
 
     {{-- TABEL KATEGORI --}}
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-warning text-dark">
-            Data Kategori Kue
-        </div>
+        <div class="card-header bg-warning text-dark">Data Kategori Kue</div>
         <div class="card-body p-0">
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-light">
@@ -206,7 +228,7 @@
                         <td>{{ $item->nama_kategori_kue }}</td>
                         <td>
                             @if($item->gambar_kategori_kue)
-                                <img src="{{ asset('storage/' . $item->gambar_kategori_kue) }}" width="50" class="img-thumbnail">
+                                <img src="{{ asset('storage/' . $item->gambar_kategori_kue) }}" class="img-thumbnail">
                             @else
                                 -
                             @endif
@@ -224,9 +246,7 @@
 
     {{-- TABEL PEGAWAI --}}
     <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-info text-white">
-            Data Pegawai
-        </div>
+        <div class="card-header bg-info text-white">Data Pegawai</div>
         <div class="card-body p-0">
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-light">
@@ -251,7 +271,7 @@
                         <td>Rp {{ number_format($item->gaji_pegawai, 0, ',', '.') }}</td>
                         <td>
                             @if($item->foto_pegawai)
-                                <img src="{{ asset('storage/' . $item->foto_pegawai) }}" width="50" class="img-thumbnail">
+                                <img src="{{ asset('storage/' . $item->foto_pegawai) }}" class="img-thumbnail">
                             @else
                                 -
                             @endif

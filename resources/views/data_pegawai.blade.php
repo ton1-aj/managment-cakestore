@@ -4,16 +4,117 @@
     <title>Data Pegawai</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .img-thumbnail {
+        /* BODY & BACKGROUND */
+        body {
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* HEADER */
+        h3 {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* CARD */
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        /* INPUT & SELECT */
+        input.form-control,
+        select.form-control,
+        textarea.form-control {
+            border-radius: 10px;
+            border: 1px solid #ced4da;
+            transition: 0.3s;
+        }
+
+        input.form-control:focus,
+        select.form-control:focus,
+        textarea.form-control:focus {
+            box-shadow: 0 0 5px rgba(0,123,255,0.5);
+            border-color: #007bff;
+        }
+
+        /* BUTTON */
+        .btn {
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* TABLE */
+        table.table {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        table.table th, table.table td {
+            vertical-align: middle;
+        }
+
+        table.table tbody tr:hover {
+            background-color: rgba(0,123,255,0.05);
+            transition: background-color 0.2s;
+        }
+
+        table.table img {
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
             max-height: 60px;
         }
+
+        /* MODAL */
+        .modal-content {
+            border-radius: 15px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #dee2e6;
+        }
+
+        /* ALERT */
+        .alert {
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+
+        /* BACK BUTTON */
+        .btn-secondary {
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
     </style>
 </head>
 <body>
 
 <div class="container mt-4">
 
-    {{-- HEADER DAN TOMBOL BACK --}}
+    {{-- HEADER DAN BACK --}}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Data Pegawai</h3>
         <a href="{{ route('admin_dashboard') }}" class="btn btn-secondary">&larr; Kembali ke Dashboard</a>
@@ -25,12 +126,12 @@
     @endif
 
     {{-- FORM TAMBAH PEGAWAI --}}
-    <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-primary text-white">Tambah Pegawai</div>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white fw-bold">Tambah Pegawai</div>
         <div class="card-body">
             <form action="{{ route('data_pegawai.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="row mb-2">
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label>Nama Pegawai</label>
                         <input type="text" name="nama_pegawai" class="form-control" required>
@@ -46,13 +147,11 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="mb-2">
+                <div class="mb-3">
                     <label>Alamat</label>
                     <textarea name="alamat_pegawai" class="form-control" required></textarea>
                 </div>
-
-                <div class="row mb-2">
+                <div class="row mb-3">
                     <div class="col-md-3">
                         <label>Jam Masuk</label>
                         <input type="time" name="jam_masuk" class="form-control" required>
@@ -70,15 +169,14 @@
                         <input type="file" name="foto_pegawai" class="form-control">
                     </div>
                 </div>
-
                 <button class="btn btn-success mt-2">Simpan</button>
             </form>
         </div>
     </div>
 
     {{-- TABEL DATA PEGAWAI --}}
-    <div class="card shadow-sm">
-        <div class="card-header bg-secondary text-white">Daftar Pegawai</div>
+    <div class="card">
+        <div class="card-header bg-secondary text-white fw-bold">Daftar Pegawai</div>
         <div class="card-body p-0">
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-light">
@@ -150,7 +248,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row mb-2">
+                    <div class="row mb-3">
                         <div class="col-md-6">
                             <label>Nama Pegawai</label>
                             <input type="text" name="nama_pegawai" id="edit_nama" class="form-control" required>
@@ -166,11 +264,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
                         <label>Alamat</label>
                         <textarea name="alamat_pegawai" id="edit_alamat" class="form-control" required></textarea>
                     </div>
-                    <div class="row mb-2">
+                    <div class="row mb-3">
                         <div class="col-md-3">
                             <label>Jam Masuk</label>
                             <input type="time" name="jam_masuk" id="edit_masuk" class="form-control" required>
@@ -222,14 +320,11 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-// Modal Edit
 const editModal = document.getElementById('editModal');
 editModal.addEventListener('show.bs.modal', function(event){
     const button = event.relatedTarget;
     const id = button.getAttribute('data-id');
-
     document.getElementById('edit_nama').value = button.getAttribute('data-nama');
     document.getElementById('edit_posisi').value = button.getAttribute('data-posisi');
     document.getElementById('edit_gaji').value = button.getAttribute('data-gaji');
@@ -239,7 +334,6 @@ editModal.addEventListener('show.bs.modal', function(event){
     document.getElementById('editForm').action = `/data_pegawai/${id}`;
 });
 
-// Modal Hapus
 const hapusModal = document.getElementById('hapusModal');
 hapusModal.addEventListener('show.bs.modal', function(event){
     const button = event.relatedTarget;
@@ -249,6 +343,5 @@ hapusModal.addEventListener('show.bs.modal', function(event){
     document.getElementById('hapusForm').action = `/data_pegawai/${id}`;
 });
 </script>
-
 </body>
 </html>
